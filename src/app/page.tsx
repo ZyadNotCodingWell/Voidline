@@ -196,7 +196,7 @@ const dialogButtonLabel = isNotStarted
       {bullets.map(b => (
         <div
           key={b.id}
-          className="fixed size-6 bg-gradient-radial from-red-600 to-primary/50 via-red-600/50 border-2 border-primary   z-40 rounded-full"
+          className="fixed size-6 bg-gradient-radial from-primary to-transparent via-primary/50 border-2 border-transparent   z-40 rounded-full"
           style={{ left: b.x, top: b.y, transform: "translate(-50%, -50%)" }}
         />
       ))}
@@ -235,7 +235,7 @@ const dialogButtonLabel = isNotStarted
 
       {/* HUD */}
       <GameHUD
-        lives={Math.floor(gameState.lives / 2)}
+        lives={Math.floor(gameState.lives)}
         ammo={gameState.ammo}
         maxAmmo={gameState.maxAmmo}
         score={gameState.score > 0 ? gameState.score - 1 : 0}
@@ -257,6 +257,11 @@ const dialogButtonLabel = isNotStarted
       {inactivePowerupMsg && (
         <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-6 py-3  bg-gradient-to-r from-transparent to-transparent via-red-600/15 border border-x-0 border-red-600 text-red-600 text-sm  animate-fade-in-out pointer-events-none z-50">
           Powerup Deactivated: {inactivePowerupMsg.toUpperCase()}
+        </div>      )}
+
+      {gameState.reloading && (
+        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-6 py-3  bg-gradient-to-r from-transparent to-transparent via-primary/15 border border-x-0 border-primary text-primary text-sm  animate-fade-in-out pointer-events-none z-50">
+            Reloading
         </div>      )}
 
     </main>

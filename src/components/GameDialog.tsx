@@ -54,7 +54,7 @@ export default function GameDialog({
             </div>
             <div className="flex items-center border-x border-x-primary/50 px-2 gap-1 col-span-2 justify-center">
               <Move   className="size-4 mr-4" />
-              Move
+              Aim
             </div>
           </DialogDescription>
         </DialogHeader>
@@ -66,7 +66,7 @@ export default function GameDialog({
           {buttonLabel}
         </Button>
         {message === "Game Over! Replay?" && (
-          <a href="/" className="text-center text-primary/50 text-xs flex justify-center ">
+          <a href="https://github.com/ZyadNotCodingWell" className="text-center text-primary/50 text-xs flex justify-center ">
             Check my profile <Heart className="ml-2 w-4 h-4 -translate-y-0.5" />
           </a>
         )}

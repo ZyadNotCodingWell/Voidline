@@ -2,7 +2,7 @@
 import React from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Heart, LucideBatteryFull, Pause, Infinity as InfIcon } from "lucide-react"
+import { Heart, LucideBatteryFull, Pause, Infinity as InfIcon, LucideBatteryMedium, LucideBatteryLow, HeartCrack } from "lucide-react"
 import PowerupCard from "./PowerupCard"
 import { PowerupType } from "@/app/page"
 
@@ -39,13 +39,19 @@ export default function GameHUD({
           ? <span className="text-lg ">zen</span>
           : (
             <>
-              {Array.from({ length: lives }, (_, i) => (
-                <Heart key={`full-${i}`} className="text-primary" />
-              ))}
-              {Array.from({ length: 3 - lives }, (_, i) => (
-                <Heart key={`empty-${i}`} className="opacity-0" />
-              ))}
-            </>
+                {/* Full hearts */}
+                {Array.from({ length: Math.floor(lives / 2) }, (_, i) => (
+                  <Heart key={`full-${i}`} className="text-primary" />
+                ))}
+              
+                {/* Half heart if odd */}
+                {lives % 2 === 1 && <HeartCrack className="text-primary" />}
+              
+                {/* Empty hearts */}
+                {Array.from({ length: 3 - Math.ceil(lives / 2) }, (_, i) => (
+                  <Heart key={`empty-${i}`} className="opacity-0" />
+                ))}
+              </>
           )
         }
       </Card>
@@ -55,10 +61,17 @@ export default function GameHUD({
       </Card>
 
       <Card className="bg-primary/5 flex px-4 py-2 text-primary border border-primary/30 shadow-sm">
-        <LucideBatteryFull className="mr-2" /> {ammo}/{maxAmmo === Infinity ? <InfIcon /> : maxAmmo}
+          {ammo >= 0.75  *  maxAmmo &&  <LucideBatteryFull className="mr-2" />}
+          {ammo <  0.75 * maxAmmo && ammo  >= 0.25 * maxAmmo &&  <LucideBatteryMedium className="mr-2" />        }
+          {ammo <  0.25 * maxAmmo &&  <LucideBatteryLow className="mr-2" />}
+         {ammo}/{maxAmmo === Infinity ? <InfIcon /> : maxAmmo}
       </Card>
-
-      <Card className="flex gap-4 bg-accent-foreground/30 px-1 py-0.5 text-primary border-primary/30 shadow-sm">
+      
+      <Card className="bg-primary/5 flex px-4 py-2 text-primary border border-primary/30 shadow-sm text-xs max-w-52">
+        A ciggy pls? <Heart className="size-4 ml-2" />
+      </Card>
+      
+      <Card className="flex gap-4 bg-accent-foreground/30 px-1 py-0.5 text-primary border-primary/0 shadow-sm">
         {(["triple","pierce"] as const).map((type) => (
           <PowerupCard
             key={type}
