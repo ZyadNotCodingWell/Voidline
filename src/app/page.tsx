@@ -87,7 +87,7 @@ const isNotStarted = !gameState.inGame && gameState.lives === 6 && gameState.sco
 const isPaused = !gameState.inGame && gameState.lives > 0 && !isNotStarted
 
 const dialogMessage = isNotStarted
-  ? "Carl Sagan Space Drift"
+  ? "Voidline"
   : isPaused
   ? "Paused - Click to Resume"
   : isGameOver
